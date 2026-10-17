@@ -4,8 +4,9 @@ $ErrorActionPreference = 'Stop'
 $version = '9.8.1'
 $root = Split-Path -Parent $MyInvocation.MyCommand.Path
 $cache = Join-Path $env:USERPROFILE '.gradle\lab3-bootstrap'
-$home = Join-Path $cache ("gradle-" + $version)
-$gradle = Join-Path $home 'bin\gradle.bat'
+
+$gradleHome = Join-Path $cache ("gradle-" + $version)
+$gradle = Join-Path $gradleHome 'bin\gradle.bat'
 if (-not (Test-Path $gradle)) {
     New-Item -ItemType Directory -Force -Path $cache | Out-Null
     $zip = Join-Path $cache ("gradle-" + $version + "-bin.zip")
