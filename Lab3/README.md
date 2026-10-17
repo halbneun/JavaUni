@@ -56,30 +56,8 @@ echo $env:JAVA_HOME
 .\gradlew.bat run
 ```
 
-Якщо `java -version` показує Java 8, а JDK 27 встановлена, у **Settings → Build Tools → Gradle → Gradle JVM** обери JDK 27, а у PowerShell скоригуй `JAVA_HOME` на фактичний каталог JDK 27 (папка без `bin`).
-
-**Про Wrapper:** Через обмеження середовища генерації до архіву не включено офіційний `gradle-wrapper.jar`. Натомість включено читабельні `gradlew.bat`, `gradlew` і `gradle-bootstrap.ps1`, що завантажують **офіційний Gradle 9.8.1** і запускають відповідну команду. Після першого успішного запуску створи стандартний Wrapper:
-
-```powershell
-.\gradlew.bat wrapper --gradle-version 9.8.1
-# Після цього Gradle замінить скрипти та створить gradle/wrapper/gradle-wrapper.jar
-.\gradlew.bat test
-```
-
-**Закоміть стандартні `gradlew`, `gradlew.bat`, `gradle-wrapper.jar`, `gradle-wrapper.properties` до Git.** `gradle-bootstrap.ps1` після цього вже не потрібен.
-
 ## Тести
 
 `TransactionStreamAnalyzerTest` містить 21 тест JUnit 5, зокрема три перевірки нескінченних стрімів із `@Timeout(2)` (`Stream.generate`). Для докладного пояснення дивись `REPORT.md`.
-
-## GitHub
-
-Поклади папку `Lab3` до вже існуючого репозиторію JavaUni **без внутрішнього `.git`**. Із кореня репозиторію:
-
-```powershell
-git add lab3
-git commit -m "Add Lab 3 - Transaction Stream Analyzer"
-git push origin main
-```
 
 Назва папки має збігатися з твоєю реальною (`lab3` або `Lab3`).
