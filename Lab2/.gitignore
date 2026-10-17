@@ -1,0 +1,16 @@
+# Build output
+.gradle/
+build/
+**/target/
+
+# IDE
+.idea/
+*.iml
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Wrapper JAR is fetched on first run by the bootstrap script.
+gradle/wrapper/gradle-wrapper.jar

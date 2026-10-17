@@ -1,0 +1,21 @@
+#!/bin/sh
+# First-run bootstrap. Downloads the official Gradle 9.8.0 wrapper JAR, then starts it.
+# The wrapper JAR is not bundled in this educational archive.
+set -eu
+APP_HOME=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+WRAPPER_JAR="$APP_HOME/gradle/wrapper/gradle-wrapper.jar"
+if [ ! -f "$WRAPPER_JAR" ]; then
+  echo 'Downloading official Gradle 9.8.0 Wrapper JAR (first run only)...' >&2
+  URL='https://services.gradle.org/distributions/gradle-9.8.0-wrapper.jar'
+  TMP="$WRAPPER_JAR.tmp"
+  if command -v curl >/dev/null 2>&1; then
+    curl -fLsS "$URL" -o "$TMP"
+  elif command -v wget >/dev/null 2>&1; then
+    wget -q "$URL" -O "$TMP"
+  else
+    echo 'Install curl/wget or run: gradle wrapper --gradle-version 9.8.0' >&2
+    exit 1
+  fi
+  mv "$TMP" "$WRAPPER_JAR"
+fi
+exec java -cp "$WRAPPER_JAR" org.gradle.wrapper.GradleWrapperMain "$@"
