@@ -58,6 +58,4 @@ echo $env:JAVA_HOME
 
 ## Тести
 
-`TransactionStreamAnalyzerTest` містить 21 тест JUnit 5, зокрема три перевірки нескінченних стрімів із `@Timeout(2)` (`Stream.generate`). Для докладного пояснення дивись `REPORT.md`.
-
-Назва папки має збігатися з твоєю реальною (`lab3` або `Lab3`).
+`TransactionStreamAnalyzerTest` містить 21 тест JUnit 5, зокрема три перевірки нескінченних стрімів із `@Timeout(2)` (`Stream.generate`).
