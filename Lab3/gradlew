@@ -1,0 +1,21 @@
+#!/bin/sh
+set -eu
+ROOT=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+CACHE="${GRADLE_USER_HOME:-$HOME/.gradle}/lab3-bootstrap"
+GRADLE="$CACHE/gradle-9.8.1/bin/gradle"
+if [ ! -x "$GRADLE" ]; then
+  mkdir -p "$CACHE"
+  ZIP="$CACHE/gradle-9.8.1-bin.zip"
+  URL="https://services.gradle.org/distributions/gradle-9.8.1-bin.zip"
+  if command -v curl >/dev/null 2>&1; then
+    curl -fL --retry 2 -o "$ZIP" "$URL"
+  elif command -v wget >/dev/null 2>&1; then
+    wget -O "$ZIP" "$URL"
+  else
+    echo 'Install curl or wget (and unzip) to bootstrap Gradle.' >&2
+    exit 1
+  fi
+  unzip -q -o "$ZIP" -d "$CACHE"
+  rm -f "$ZIP"
+fi
+exec "$GRADLE" -p "$ROOT" "$@"
